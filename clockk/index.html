@@ -1,0 +1,123 @@
+<html>
+<head>
+  <title>My Alarm clock</title> 
+</head>
+<style type="text/css">
+    *{
+        margin:0;
+    }
+    #screen{
+    font-family:'alarmclock';   
+    position: absolute;
+    height: 180px; 
+    font-size:90px;
+    background-color: black;
+    color:red;
+    margin-left: 425px;
+    margin-top:351px;
+    text-align: center;
+    text-shadow: 0 0 10px #FF0000;
+        
+    }    
+    @font-face {
+    font-family: 'alarmclock';
+    src: url(alarmclock.ttf);
+    
+}
+    #img{
+    position: absolute;
+        z-index:-1;
+    }
+    #H{
+        margin-left:600px;
+        margin-top:560px;
+        background-color: dimgray;
+        color: aliceblue;
+    }
+    #M{
+        background-color: dimgray;
+        color:aliceblue;
+        
+    }
+    #A{
+       background-color: dimgray;
+        color:aliceblue;  
+    }
+    
+    audio{
+        position: absolute;
+        margin-left:500px;
+        margin-top:305px;
+        
+    }
+</style> 
+    
+<body onLoad="showTime()">
+    <img id="img" src="alarmclock.jpg">
+    
+    <audio controls>
+  <source src="alarm.mp3" type="audio/mpeg">
+    </audio>
+    
+<form name="alarmClock">
+    
+<input id ="screen" type="text" name="timeScreen" size=13>
+    <input id="H" type="text" value=" hr " size=3  />
+    <input id="M" type="text" value=" min " size=3  />       
+   <button id="A" type="submit"  onClick="setAlarm()">SetAlarm</button>
+
+</form>
+    <script language="JavaScript">
+    
+        
+function showTime() {
+  var timeNow = new Date();
+  var hours   = timeNow.getHours();
+  var minutes = timeNow.getMinutes();
+  var seconds = timeNow.getSeconds();
+  var timeString = "" + ((hours > 12) ? hours - 12 : hours);
+  timeString  += ((minutes < 10) ? ":0" : ":") + minutes;
+  timeString  += ((seconds < 10) ? ":0" : ":") + seconds;
+  timeString  += (hours >= 12) ? " P.M." : " A.M.";
+  document.alarmClock.timeScreen.value = timeString;
+  timerID = setTimeout("showTime()", 1000);
+
+}   
+        
+        function audio(){
+            if(setAlarm()=== showTime())
+                console.log(audio);
+        
+        }
+      
+    function setAlarm() {
+       var cDate = new Date();
+       var currentHr = cDate.getHours();
+       var currentMin = cDate.getMinutes();
+        var alarmHrs = document.getElementById('H').value;
+       var alarmMins = document.getElementById('M').value;
+       document.setAlarm.submit();
+        
+      if(currentHr === 0){
+          amOrPm = "P.M.";
+      }
+      if(currentHr > 12){
+        currentHr = currentHr - 12;
+        amOrPm = "P.M.";
+      }
+      console.log(currentHr.value);
+      console.log(alarmHrs);
+      console.log(currentMin.value);
+      console.log(alarmMins);
+        
+      if(alarmHrs == currentHr && alarmMins == currentMin) {
+        console.log(cDate);
+       audio();
+      }
+    }
+  </script>
+    
+    
+
+</body>
+</html>
